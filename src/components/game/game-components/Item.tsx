@@ -31,7 +31,7 @@ export function Item(props: ItemProps) {
 
 	return (
 		<Sprite
-			image={`items/kenney_generic-items/PNG/Colored/genericItem_color_${num}.png`}
+			image={`assets/sprites/items/genericItem_color_${num}.png`}
 			anchor={0.5}
 			scale={{ x: 0.5, y: 0.5 }}
 			x={props.x}
