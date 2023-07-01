@@ -1,5 +1,6 @@
-import { Sprite } from '@pixi/react-animated';
-import { useMemo } from 'react';
+import { Sprite, PixiRef, useTick } from '@pixi/react';
+// import { DEG_TO_RAD } from 'pixi.js';
+import { useMemo, useRef } from 'react';
 
 function validateNumber(str: string) {
 	if (!str.match(/\d/)) return false;
@@ -9,6 +10,9 @@ function validateNumber(str: string) {
 
 	return true;
 }
+let timer = 0;
+
+type ISprite = PixiRef<typeof Sprite>;
 
 type ItemProps = {
 	itemNum: string;
@@ -29,8 +33,20 @@ export function Item(props: ItemProps) {
 		return props.itemNum;
 	}, [props.itemNum]);
 
+	const itemRef = useRef<ISprite>(null!);
+
+	useTick((delta) => {
+		if (!itemRef.current) return;
+		timer += delta * 0.05;
+		const theta = timer;
+		const x = props.x + Math.cos(theta) * 100;
+		const y = props.y + Math.sin(theta) * 100;
+		itemRef.current.position.set(x, y);
+	});
+
 	return (
 		<Sprite
+			ref={itemRef}
 			image={`assets/sprites/items/genericItem_color_${num}.png`}
 			anchor={0.5}
 			scale={{ x: 0.5, y: 0.5 }}
