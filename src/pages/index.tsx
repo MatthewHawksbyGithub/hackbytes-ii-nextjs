@@ -16,10 +16,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        CREATE APP AGAIN
         <div className={styles.container}>
           <h1 className={styles.title}>
-            Create <span className={styles.pinkSpan}>T3</span> App
           </h1>
           <div className={styles.cardRow}>
             <Link
@@ -49,6 +47,15 @@ export default function Home() {
             <p className={styles.showcaseText}>
               {hello.data ? hello.data.greeting : "Loading tRPC query..."}
             </p>
+            <form action="" method="get" className="form">
+              <div className="numberSection">
+                <label htmlFor="number">Enter your high score: </label>
+                <input type="text" name="name" id="number"/>
+              </div>
+              <div className="inputSection">
+                <input type="submit" defaultValue="Add number to Database." />
+              </div>
+            </form>
           </div>
         </div>
       </main>
