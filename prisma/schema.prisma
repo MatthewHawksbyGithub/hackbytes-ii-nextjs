@@ -10,7 +10,7 @@ datasource db {
 }
 
 model highscores {
-  userid Int     @id @unique @default(autoincrement())
+  userid Int     @id @unique(map: "unique_id") @default(autoincrement())
   name   String? @db.VarChar(50)
   score  Int?    @db.UnsignedInt
 }
