@@ -1,8 +1,14 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import styles from "./index.module.css";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
 import { api } from "~/utils/api";
+import { useState} from "react";
+
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 
 export default function Home() {
@@ -57,10 +63,43 @@ export default function Home() {
               </div>
             </form>
           </div>
+          
+          <h3 className={styles.cardTitle}>Updated.</h3>
+          
+          <App></App>
         </div>
       </main>
     </>
   );
+}
+
+function App(){
+  const[val, setVal] = useState("Hello There")
+
+  const click = async (): Promise<void> => {
+    try {
+      await prisma.highscores.create({
+        data: {
+         name: "Bill",
+         score: 1000,
+        },
+      });
+    }catch (error) {
+      console.error(error);
+    }
+  };
+    // Save the value to the database using Prisma
+  const change = (event: { target: { value: any; }; }) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    //setVal( event.target.value)
+  }
+  return(
+    <div className = "App">
+      <h1>Heres the div</h1>
+      <input onChange={change} value = {val}/>
+      <button onClick = {click}>Click me</button>
+    </div>
+  )
 }
 //
 //<!--<AuthShowcase />-->
