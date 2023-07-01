@@ -16,7 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        CREATE APP
+        CREATE APP AGAIN
         <div className={styles.container}>
           <h1 className={styles.title}>
             Create <span className={styles.pinkSpan}>T3</span> App
@@ -49,14 +49,14 @@ export default function Home() {
             <p className={styles.showcaseText}>
               {hello.data ? hello.data.greeting : "Loading tRPC query..."}
             </p>
-            <AuthShowcase />
           </div>
         </div>
       </main>
     </>
   );
 }
-
+//
+//<!--<AuthShowcase />-->
 //function AuthShowcase() {
 // const { data: sessionData } = useSession();
 //
