@@ -1,6 +1,8 @@
 import { Sprite, PixiRef, useTick } from '@pixi/react';
 // import { DEG_TO_RAD } from 'pixi.js';
-import { useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import '@pixi/events';
+import { FederatedPointerEvent } from '@pixi/events';
 
 function validateNumber(str: string) {
 	if (!str.match(/\d/)) return false;
@@ -44,8 +46,23 @@ export function Item(props: ItemProps) {
 		// itemRef.current.position.set(x, y);
 	});
 
+	const [isDragged, setDragged] = useState<boolean>(false);
+
+	const handlePointerDown = useCallback((event: FederatedPointerEvent) => {
+		setDragged(true);
+		console.log('pointer down');
+	}, []);
+	const handlePointerUp = useCallback((event: FederatedPointerEvent) => {
+		if (isDragged) {
+			setDragged(false);
+		}
+	}, []);
+
 	return (
 		<Sprite
+			interactive
+			onpointerdown={handlePointerDown}
+			onpointerup={handlePointerUp}
 			ref={(item) => {
 				if (!item) return;
 				itemRef.current = item; // assign ref
