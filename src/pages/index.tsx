@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { api } from '~/utils/api';
 import dynamic from 'next/dynamic';
 import { GameWrapper } from '~/components/game/GameWrapper';
-// import { Stage } from '@pixi/react';
-// import { Game } from '~/components/game/Game';
+import { Stage } from '@pixi/react';
+import { Game } from '~/components/game/Game';
 
 // const GameWrapper = dynamic(
 // 	() => import('~/components/game/GameWrapper').then((mod) => mod.GameWrapper),
@@ -16,7 +16,7 @@ import { GameWrapper } from '~/components/game/GameWrapper';
 // );
 
 export default function Home() {
-	const hello = api.example.hello.useQuery({ text: 'from tRPC' });
+	// const hello = api.example.hello.useQuery({ text: 'from tRPC' });
 
 	return (
 		<>
@@ -33,31 +33,36 @@ export default function Home() {
 				/>
 			</Head>
 
-			<main className={styles.main}>{/* /<GameWrapper /> */}</main>
+			<main className={styles.main}>
+				<GameWrapper />
+				{/* <Stage>
+					<Game />
+				</Stage> */}
+			</main>
 		</>
 	);
 }
 
-function AuthShowcase() {
-	const { data: sessionData } = useSession();
+// function AuthShowcase() {
+// 	const { data: sessionData } = useSession();
 
-	const { data: secretMessage } = api.example.getSecretMessage.useQuery(
-		undefined, // no input
-		{ enabled: sessionData?.user !== undefined }
-	);
+// 	const { data: secretMessage } = api.example.getSecretMessage.useQuery(
+// 		undefined, // no input
+// 		{ enabled: sessionData?.user !== undefined }
+// 	);
 
-	return (
-		<div className={styles.authContainer}>
-			<p className={styles.showcaseText}>
-				{sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-				{secretMessage && <span> - {secretMessage}</span>}
-			</p>
-			<button
-				className={styles.loginButton}
-				onClick={sessionData ? () => void signOut() : () => void signIn()}
-			>
-				{sessionData ? 'Sign out' : 'Sign in'}
-			</button>
-		</div>
-	);
-}
+// 	return (
+// 		<div className={styles.authContainer}>
+// 			<p className={styles.showcaseText}>
+// 				{sessionData && <span>Logged in as {sessionData.user?.name}</span>}
+// 				{secretMessage && <span> - {secretMessage}</span>}
+// 			</p>
+// 			<button
+// 				className={styles.loginButton}
+// 				onClick={sessionData ? () => void signOut() : () => void signIn()}
+// 			>
+// 				{sessionData ? 'Sign out' : 'Sign in'}
+// 			</button>
+// 		</div>
+// 	);
+// }
