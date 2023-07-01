@@ -10,7 +10,7 @@ export function GameWrapper() {
 			<Stage
 				width={600}
 				height={400}
-				options={{ backgroundColor: 0x999999 }}
+				options={{ backgroundColor: 0x9999a1 }}
 			>
 				<Game />
 			</Stage>
