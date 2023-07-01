@@ -37,19 +37,22 @@ export function Item(props: ItemProps) {
 
 	useTick((delta) => {
 		if (!itemRef.current) return;
-		timer += delta * 0.05;
-		const theta = timer;
-		const x = props.x + Math.cos(theta) * 100;
-		const y = props.y + Math.sin(theta) * 100;
-		itemRef.current.position.set(x, y);
+		// timer += delta * 0.05;
+		// const theta = timer;
+		// const x = props.x + Math.cos(theta) * 100;
+		// const y = props.y + Math.sin(theta) * 100;
+		// itemRef.current.position.set(x, y);
 	});
 
 	return (
 		<Sprite
-			ref={itemRef}
+			ref={(item) => {
+				if (!item) return;
+				itemRef.current = item; // assign ref
+			}}
 			image={`assets/sprites/items/genericItem_color_${num}.png`}
 			anchor={0.5}
-			scale={{ x: 0.5, y: 0.5 }}
+			scale={{ x: 0.75, y: 0.75 }}
 			x={props.x}
 			y={props.y}
 		/>
