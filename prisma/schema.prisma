@@ -1,0 +1,24 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["jsonProtocol"]
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model highscores {
+  userid Int     @id @unique(map: "unique_id")
+  name   String? @db.VarChar(50)
+  score  Int?    @db.UnsignedInt
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model tabletable {
+  scores Float?   @db.Float
+  number Decimal? @db.Decimal(10, 0)
+
+  @@ignore
+}
