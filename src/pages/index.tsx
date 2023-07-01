@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { api } from '~/utils/api';
 import dynamic from 'next/dynamic';
 import { GameWrapper } from '~/components/game/GameWrapper';
-import { Stage } from '@pixi/react';
-import { Game } from '~/components/game/Game';
+// import { Stage } from '@pixi/react';
+// import { Game } from '~/components/game/Game';
 
 // const GameWrapper = dynamic(
 // 	() => import('~/components/game/GameWrapper').then((mod) => mod.GameWrapper),
@@ -33,15 +33,7 @@ export default function Home() {
 				/>
 			</Head>
 
-			<main className={styles.main}>
-				<Stage
-					width={600}
-					height={400}
-					options={{ backgroundColor: 0x999999 }}
-				>
-					<Game />
-				</Stage>
-			</main>
+			<main className={styles.main}>{/* /<GameWrapper /> */}</main>
 		</>
 	);
 }
