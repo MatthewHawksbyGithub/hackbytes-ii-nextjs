@@ -25,7 +25,7 @@ export function Game() {
 				y={675}
 			/>
 			<Item
-				itemNum='066'
+				itemNum='127'
 				x={500}
 				y={400}
 			/>
