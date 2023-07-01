@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../server/db';
 
-const prisma = new PrismaClient();
+//const prisma :PrismaClient  = new PrismaClient();
 
 
 interface Person {
@@ -46,13 +48,16 @@ function handleSubmissionByUser(event: Event) {
     score: 69420,
   };
 
-  addRecord(person)
+   // eslint-disable-next-line @typescript-eslint/no-floating-promises
+   addRecord(person)
 }
 
 async function addRecord(recordToAdd: Person) {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const createdRecord = await prisma.highscores.create({
       data: {
+        userid:1,
         name: recordToAdd.name,
         score: 69420,
       },
@@ -62,6 +67,7 @@ async function addRecord(recordToAdd: Person) {
   } catch (error) {
     console.error('Error creating record:', error);
   } finally {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     await prisma.$disconnect();
   }
 }
