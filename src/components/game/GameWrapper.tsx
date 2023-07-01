@@ -8,8 +8,8 @@ export function GameWrapper() {
 	return (
 		<Suspense fallback={<Fallback />}>
 			<Stage
-				width={600}
-				height={400}
+				width={1200}
+				height={800}
 				options={{ backgroundColor: 0x9999a1 }}
 			>
 				<Game />
