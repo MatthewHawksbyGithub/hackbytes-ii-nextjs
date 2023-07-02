@@ -48,21 +48,31 @@ export function Item(props: ItemProps) {
 
 	const [isDragged, setDragged] = useState<boolean>(false);
 
+	const handleMouseMove = useCallback((e: FederatedPointerEvent) => {
+		if (!itemRef.current) return;
+		// if (!isDragged) return;
+		itemRef.current.position.x += e.movementX;
+		itemRef.current.position.y += e.movementY;
+	}, []);
+
 	const handlePointerDown = useCallback((event: FederatedPointerEvent) => {
 		setDragged(true);
-		console.log('pointer down');
+		console.log('mouse down');
+		itemRef.current?.addEventListener('mousemove', handleMouseMove);
 	}, []);
 	const handlePointerUp = useCallback((event: FederatedPointerEvent) => {
 		if (isDragged) {
 			setDragged(false);
 		}
+		console.log('mouse up');
+		itemRef.current?.removeEventListener('mousemove', handleMouseMove);
 	}, []);
 
 	return (
 		<Sprite
 			interactive
-			onpointerdown={handlePointerDown}
-			onpointerup={handlePointerUp}
+			onmousedown={handlePointerDown}
+			onmouseup={handlePointerUp}
 			ref={(item) => {
 				if (!item) return;
 				itemRef.current = item; // assign ref
